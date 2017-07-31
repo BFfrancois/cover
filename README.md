@@ -15,7 +15,6 @@ Things you may want to cover:
 
 * Run bin/rake db:reset to create, load and seed db
 
-* Sign up for an account(restaurant or owner).
-
 * Run bin/rails s -b 0.0.0.0 to start the server
 
+* Sign up for an account(restaurant or worker)
