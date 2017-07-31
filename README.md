@@ -5,20 +5,17 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Fork & Clone
 
-* System dependencies
+* Run bundle install to install dependencies
 
-* Configuration
+* Create config/database.yml by copying config/database.example.yml
 
-* Database creation
+* Create config/secrets.yml by copying config/secrets.example.yml
 
-* Database initialization
+* Run bin/rake db:reset to create, load and seed db
 
-* How to run the test suite
+* Sign up for an account(restaurant or owner).
 
-* Services (job queues, cache servers, search engines, etc.)
+* Run bin/rails s -b 0.0.0.0 to start the server
 
-* Deployment instructions
-
-* ...
