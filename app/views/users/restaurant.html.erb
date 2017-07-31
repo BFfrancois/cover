@@ -1,0 +1,95 @@
+<body class="signup-bg">
+<div class="container">
+  <div class="container">
+    <div class="row centered-form">
+      <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Sign up your restaurant
+              <small>It's free!</small>
+            </h3>
+          </div>
+          <div class="panel-body">
+            <%= form_for @user, url: users_path do |f| %>
+                <%= f.hidden_field :usertype_id, value: @usertype.id %>
+                <% if @user.image == nil %>
+                  <%= f.hidden_field :image, value: "https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" %>
+                <% end %>
+                <div class="row">
+                  <% if @user.errors.any? %>
+                      <p><%= @user.errors.full_messages %></p>
+                  <% end %>
+                  <% flash.each do |key, value| %>
+                      <div class="alert alert-<%= key %>"><%= value %></div>
+                  <% end %>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <%= f.text_field :first_name, class: 'form-control input-sm', placeholder: 'First Name', required: false %>
+                      <p class="error error-empty"> Please enter your first name. </p>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <%= f.text_field :last_name, class: 'form-control input-sm', placeholder: 'Last Name', required: false %>
+                      <p class="error error-empty"> Please enter your last name. </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <%= f.email_field :email, class: 'form-control input-sm', placeholder: 'Email', required: false %>
+                  <p class="error error-empty"> Please enter your Email. </p>
+                </div>
+               <div class="form-group">
+                  <%= f.text_field :image, class: 'form-control input-sm', placeholder: 'www.example.com/image', required: false %>
+                </div>
+                <div class="form-group">
+                  <%= f.text_field :restaurant_name, class: 'form-control input-sm', placeholder: 'Company Name', required: false %>
+                  <p class="error error-empty"> Please enter your company name. </p>
+                </div>
+                <div class="form-group">
+                  <%= f.text_field :street_address, class: 'form-control input-sm', placeholder: 'Street Address', required: false %>
+                  <p class="error error-empty"> Please enter your restaurant's street address. </p>
+                </div>
+                <div class="form-group">
+                  <%= f.text_field :city, class: 'form-control input-sm', placeholder: 'City', required: false %>
+                  <p class="error error-empty"> Please enter your city. </p>
+                </div>
+                <div class="form-group">
+                  <%= f.text_field :province, class: 'form-control input-sm', placeholder: 'Province', required: false %>
+                  <p class="error error-empty"> Please enter your province. </p>
+                </div>
+                <div class="form-group">
+                  <%= f.text_field :postal_code, class: 'form-control input-sm', placeholder: 'Postal code', required: false %>
+                  <p class="error error-empty"> Please enter a postal code. </p>
+                </div>
+                <div class="form-group">
+                  <%= f.text_field :cell, class: 'form-control input-sm', placeholder: 'Phone number', required: false %>
+                  <p class="error error-empty"> Please enter a phone number. </p>
+                  <p class="error error-phone-length"> Please enter a 10-digit phone number. </p>
+                </div>
+                <div class="row">
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <%= f.password_field :password, class: 'form-control input-sm', placeholder: 'Password', required: false %>
+                      <p class="error error-empty"> Please enter a password. </p>
+                    </div>
+                  </div>
+                  <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                      <%= f.password_field :password_confirmation, class: 'form-control input-sm', placeholder: 'Confirm Password', required: false %>
+                      <p class="error error-empty"> Please confirm your password. </p>
+                    </div>
+                  </div>
+                  <div class="col-xs-12">
+                    <p class="error error-matching"> Passwords do not match. </p>
+                  </div>
+                </div>
+                <%= f.submit 'Submit', class: 'btn btn-info btn-block' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

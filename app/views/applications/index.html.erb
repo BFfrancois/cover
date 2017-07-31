@@ -1,0 +1,19 @@
+<div class="container">
+  <% if @userapps %>
+    <h4> Pending </h4>
+    <div>
+      <% @userapps.each do |userapp| %>
+        <%= render 'userapp', userapp: userapp %>
+      <% end %>
+    </div>
+    <h4> Accepted </h4>
+    <div>
+      <% @filter.each do |f| %>
+        <%= render 'filter', f: f %> <br>
+      <% end %>
+    </div>
+  <% else %>
+    <h2> No applications have been accepted yet </h2>
+    <a href="/jobs"> Look for more </a>
+  <% end %>
+</div>

@@ -1,0 +1,13 @@
+{:uriI"≠file://app/assets/images/Twilio%20Console%20-%20Dev%20Tools%20Debugger_files/a6082066.html?type=text/html&id=885c988fb2772f82dee62ac6134aaa338d90fa988bceda17b5ae5b643d58186f:ET:load_pathI"app/assets/images;T:filenameI"Napp/assets/images/Twilio Console - Dev Tools Debugger_files/a6082066.html;T:	nameI"7Twilio Console - Dev Tools Debugger_files/a6082066;T:logical_pathI"<Twilio Console - Dev Tools Debugger_files/a6082066.html;T:content_typeI"text/html;T:sourceI"ø
+<!-- saved from url=(0064)https://a6082066.cdn.optimizely.com/client_storage/a6082066.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script>
+
+var allowedOrigins = [["www\\.twilio\\.com", ""], ["https\\:\\/\\/go\\.twilio\\.com", ""]];
+var blockedOrigins = [];
+
+!function(){"use strict";function e(e){return!a||0!==e.indexOf(a.origin)}function i(e,i){return new RegExp(i[0],i[1]).test(e)}function r(i){a&&e(i.key)&&a.source.postMessage(JSON.stringify({type:"SYNC",response:{key:i.key,value:i.newValue}}),a.origin)}var n,t,o;try{n=window.localStorage}catch(s){t=s}var a,g="_",f=function(r){var s,f,d,c,u,l=!1;for(u=0;u<allowedOrigins.length;u++)if(i(r.origin,allowedOrigins[u])){l=!0;break}if(l)for(u=0;u<blockedOrigins.length;u++)if(i(r.origin,blockedOrigins[u])){l=!1;break}if(l){a=r;try{s=JSON.parse(r.data)}catch(y){return}if(d=r.origin+g+s.key,!n){if(o)return;return o=t?t.toString():"Localstorage is undefined",c={id:"iframeerror",type:"ERROR",response:"Error accessing localStorage: "+o},r.source.postMessage(JSON.stringify(c),r.origin),void 0}if("GET"===s.type)f=n.getItem(d);else if("PUT"===s.type)f=n.setItem(d,s.value);else{if("GETALL"!==s.type)return;f={};for(var p in n)e(p)&&(f[p]=n.getItem(p))}"undefined"!=typeof s.id&&(c={id:s.id,response:f},r.source.postMessage(JSON.stringify(c),r.origin))}};window.addEventListener("message",f,!0),window.addEventListener("storage",r,!0)}();
+</script></head><body></body></html>;T:metadata{	:dependencieso:Set:
+@hash}
+I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"2processors:type=text/html&file_type=text/html;TTI"ffile-digest://app/assets/images/Twilio%20Console%20-%20Dev%20Tools%20Debugger_files/a6082066.html;TTF:charsetI"
+utf-8;F:digest"%¯•b‚Œ"ô◊Ω¥®níî‹ä¶çÔ∆ˆÇ0•hË™%A:lengthiø:dependencies_digest"%S£Ã…â∞C÷^¶Ã¥ø;ΩQLnfR∫öî⁄äÅ"î–:idI"E885c988fb2772f82dee62ac6134aaa338d90fa988bceda17b5ae5b643d58186f;F:
+mtimel+Vë{Y

@@ -1,0 +1,31 @@
+<!-- View for a user, restaurant -->
+<div class="container-fluid">
+  <% if current_user.usertype_id == 1 %>
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header">
+            Here are your job posts, <%= current_user.restaurant_name %>
+          </h1>
+          <%= link_to '+ New Job', [:new, :job], class: 'btn btn-primary btn-xs' %>
+        </div>
+      </div>
+      <div class="jobs">
+        <% if @userjobs == nil %>
+          <h1 class="page-header">
+            You have no jobs!
+          </h1>
+            <%= link_to '+ New Job', [:new, :job], class: 'btn btn-primary btn-xs' %>
+        <% else %>
+            <% @userjobs.each_slice(3) do |jobs| %>
+                <%= render :partial => "job", :collection => jobs, :as => :j %>
+            <% end %>
+        <% end %>
+      </div>
+
+      <!-- View for a user, worker -->
+  <% else %>
+      <% @jobs.each_slice(3) do |jobs| %>
+          <%= render :partial => "job", :collection => jobs, :as => :j %>
+      <% end %>
+  <% end %>
+</div>

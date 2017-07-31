@@ -1,0 +1,34 @@
+<%= link_to j do %>
+    <div class="col-xs-12 col-sm-6 col-md-4">
+      <div class="card hovercard">
+        <div class="cardheader">
+        </div>
+        <div class="avatar">
+          <img alt="" src="<%= j.user.image %>">
+        </div>
+
+        <div class="info">
+          <div class="title">
+            <%= link_to (user_path(j.user.id)) do %>
+              <strong><%= j.user.restaurant_name %></strong>
+            <% end %>
+          </div>
+
+          <div style="font-size:20px; font-weight:bold;" class="desc">
+            job position: <%= j.jobtype.name %>
+          </div>
+
+          <br>
+
+          <div class="desc">
+            Start time: <%= j.start_time.strftime('%A, %B %e at %l:%M %P') %>
+          </div>
+
+          <div class="desc">
+            End time: <%= j.end_time.strftime('%A, %B %e at %l:%M %P') %>
+          </div>
+        </div>
+        <br>
+      </div>
+    </div>
+<% end %>

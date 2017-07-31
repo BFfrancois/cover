@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-1">
+      <%= form_for (@job) do |form| %>
+          <%= form.hidden_field :status, value: "open" %>
+          <% if form.object.errors.any? %>
+              <div class="alert alert-danger">
+                <strong>The following errors prevented saving:</strong>
+                <ul>
+                  <% form.object.errors.full_messages.each do |error| %>
+                      <li><%= error %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+
+          <div class="form-group select-job">
+            <%= form.label :select_job %>
+            <%= form.collection_select(:jobtype_id, Jobtype.all, :id, :name) %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :start_time %>
+            <%= form.datetime_field :start_time, class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :end_time %>
+            <%= form.datetime_field :end_time, class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :rate %>
+            <%= form.text_field :rate, class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :description %>
+            <%= form.text_area :description, class: 'form-control' %>
+          </div>
+
+          <%= form.submit 'Create Job', class: 'btn btn-primary btn-xs' %>
+          <br>
+          <br>
+          <%= link_to 'Go back to Jobs', [:jobs], class: 'btn btn-primary btn-xs' %>
+      <% end %>
+    </div>
+  </div>
+</div>

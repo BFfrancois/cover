@@ -1,0 +1,284 @@
+<!-- This page renders differently depending on whether the user is a restaurant or a worker -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-7 ">
+
+      <!-- If a restaurant -->
+      <% if @user.usertype_id == 1 %>
+          <div class="panel panel-default">
+
+            <!-- Heading -->
+            <div class="panel-heading">
+              <h4><%= @user.restaurant_name %></h4>
+            </div>
+
+            <!-- Table showing restaurant details -->
+            <div class="panel-body">
+              <div class="wrapper">
+                <img class="img-circle img-responsive" src="<%=@user.image%>">
+              </div>
+            </div>
+
+            <table class="table">
+              <tr>
+                <td>
+                  Description:
+                </td>
+                <td>
+                  <%= @user.description %>
+                </td>
+              </tr>
+              <tr>
+                <td>Manager:</td>
+                <td><%= @user.first_name %>&nbsp;<%= @user.last_name %></td>
+              </tr>
+              <tr>
+                <td>Phone:</td>
+                <td><%= number_to_phone(@user.cell, area_code: true) %></td>
+              </tr>
+              <tr>
+                <td>
+                  Email:
+                </td>
+                <td>
+                  <%= @user.email %><br>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Address:
+                </td>
+                <td>
+                  <%= @user.street_address %><br>
+                  <%= @user.city %>,&nbsp;<%= @user.province %><br>
+                  <%= @user.postal_code %>
+                </td>
+              </tr>
+            </table>
+
+            <!-- Button shows/hides all reviews and form to create reviews -->
+            <div class="panel-body">
+
+              <button class="btn btn-primary btn-xs" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                See reviews
+              </button>
+
+              <div class="collapse" id="collapseExample">
+
+                <div class="well">
+                  <table class="table">
+                    <thead>
+                    <th>Rating</th>
+                    <th>Comment</th>
+                    </thead>
+                    <tbody>
+                    <% if @user.reviews.exists? %>
+                        <% @user.reviews.reverse_each do |item| %>
+                            <tr>
+                              <td><%= '⭐' * item.rating %></td>
+                              <td><%= item.comment %></td>
+                            </tr>
+                        <% end %>
+                    <% else %>
+                        <tr>
+                          <td>No reviews yet!</td>
+                        </tr>
+                    <% end %>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Logged-in users can see form to create reviews -->
+                <div class="well">
+                  <% if current_user %>
+                      <%= form_for [@user, @review], class: 'form-inline' do |f| %>
+                          <div class="form-group">
+                            <%= f.label :rating, 'Add rating:' %>
+                            <%= f.select :rating, 1..5 %>
+                          </div>
+                          <div class="form-group">
+                            <%= f.label :comment, 'Add comment:' %>
+                            <%= f.text_area :comment, class: 'form-control' %>
+                          </div>
+                          <%= f.submit 'Add review', class: 'btn btn-block' %>
+                      <% end %>
+                  <% end %>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+      <% end %>
+
+      <!-- If a worker -->
+      <% if @user.usertype_id == 2 %>
+          <div class="panel panel-default">
+
+            <!-- Panel heading -->
+            <div class="panel-heading">
+              <h4><%= @user.first_name %> <%= @user.last_name %></h4>
+            </div>
+
+            <!-- Table showing worker details  -->
+            <div class="panel-body">
+              <div class="wrapper">
+                <img class="img-circle img-responsive" src="<%=@user.image%>">
+              </div>
+            </div>
+
+            <table class="table">
+              <tr>
+                <td>Phone:</td>
+                <td><%= number_to_phone(@user.cell, area_code: true) %></td>
+              </tr>
+              <tr>
+                <td>
+                  Email:
+                </td>
+                <td>
+                  <%= @user.email %><br>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Postal code:
+                </td>
+                <td>
+                  <%= @user.postal_code %>
+                </td>
+              </tr>
+            </table>
+
+            <!-- Button shows/hides all experience and form to create experience -->
+            <div class="panel-body">
+
+              <button class="btn btn-primary btn-xs" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                See experience
+              </button>
+
+              <div class="collapse" id="collapseExample">
+
+                <div class="well">
+                  <table class="table">
+                    <% if @user.experiences.exists? %>
+                        <% @user.experiences.each do |e| %>
+                            <tbody>
+                            <tr>
+                              <td>Employer:</td>
+                              <td><%= e.employer_name %></td>
+                            </tr>
+                            <tr>
+                              <td>Job type:</td>
+                              <td><%= e.jobtype.name %></td>
+                            </tr>
+                            <tr>
+                              <td>Months:</td>
+                              <td><%= e.months %></td>
+                            </tr>
+                            <tr>
+                              <td>Additional description:</td>
+                              <td><%= e.description %></td>
+                            </tr>
+                            </tbody>
+                        <% end %>
+                    <% else %>
+                        <tbody>
+                        <tr>
+                          <td>No experience added!</td>
+                        </tr>
+                        </tbody>
+                    <% end %>
+                  </table>
+                </div>
+
+                <!-- Logged-in users that are viewing their own profile can see form to create experience -->
+                <% if current_user == @user %>
+                    <div class="well">
+                      <%= form_for [@user, @experience], class: 'form-inline' do |f| %>
+                          <div class="form-group">
+                            <%= f.label :jobtype_id, 'Job description' %>:
+                            <%= f.collection_select(:jobtype_id, Jobtype.all, :id, :name) %>
+                          </div>
+                          <div class="form-group">
+                            <%= f.label :employer_name, 'Employer' %>:
+                            <%= f.text_field :employer_name, class: 'form-control input-sm' %>
+                          </div>
+                          <div class="form-group">
+                            <%= f.label :months, 'Months of experience' %>:
+                            <%= f.text_field :months, class: 'form-control input-sm' %>
+                          </div>
+                          <div class="form-group">
+                            <%= f.label :description, 'Additional description (optional)' %>:
+                            <%= f.text_area :description, class: 'form-control input-sm' %>
+                          </div>
+                          <%= f.submit 'Add experience', class: 'btn btn-block' %>
+                      <% end %>
+                    </div>
+                <% end %>
+
+              </div>
+
+            </div>
+
+            <!-- Button shows/hides all reviews and form to create reviews -->
+            <div class="panel-body">
+
+              <button class="btn btn-primary btn-xs" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
+                See reviews
+              </button>
+
+              <div class="collapse" id="collapseExample2">
+
+                <div class="well">
+                  <table class="table">
+                    <% if @user.reviews.exists? %>
+                        <thead>
+                        <th>Rating</th>
+                        <th>Comment</th>
+                        </thead>
+                        <tbody>
+                        <% @user.reviews.reverse_each do |item| %>
+                            <tr>
+                              <td><%= '⭐' * item.rating %></td>
+                              <td><%= item.comment %></td>
+                            </tr>
+                        <% end %>
+                        </tbody>
+                    <% else %>
+                        <tbody>
+                        No reviews yet!
+                        </tbody>
+                    <% end %>
+                  </table>
+                </div>
+
+                <!-- Logged-in users can see form to create reviews -->
+                <% if current_user %>
+                    <div class="well">
+                      <%= form_for [@user, @review], class: 'form-inline' do |f| %>
+                          <div class="form-group">
+                            <%= f.label :rating, 'Add rating:' %>
+                            <%= f.select :rating, 1..5 %>
+                          </div>
+                          <div class="form-group">
+                            <%= f.label :comment, 'Add comment:' %>
+                            <%= f.text_area :comment, class: 'form-control input-sm' %>
+                          </div>
+                          <%= f.submit 'Add review', class: 'btn btn-block' %>
+                      <% end %>
+                    </div>
+                <% end %>
+
+              </div>
+
+            </div>
+
+          </div>
+
+      <% end %>
+
+    </div>
+  </div>
+</div>
